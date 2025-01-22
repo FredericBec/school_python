@@ -6,19 +6,22 @@ Classe School
 
 from dataclasses import dataclass, field
 
-from daos.course_dao import CourseDao
-from models.course import Course
-from models.teacher import Teacher
-from models.student import Student
+from ecole.daos.course_dao import CourseDao
+from ecole.daos.student_dao import StudentDao
+from ecole.daos.teacher_dao import TeacherDao
+from ecole.models.course import Course
+from ecole.models.student import Student
+from ecole.models.teacher import Teacher
 
 
 @dataclass
 class School:
     """Couche métier de l'application de gestion d'une école,
     reprenant les cas d'utilisation et les spécifications fonctionnelles :
-    - courses : liste des cours existants
-    - teachers : liste des enseignants
-    - students : liste des élèves"""
+        - courses : liste des cours existants
+        - teachers : liste des enseignants
+        - students : liste des élèves
+    """
 
     courses: list[Course] = field(default_factory=list, init=False)
     teachers: list[Teacher] = field(default_factory=list, init=False)
@@ -46,7 +49,27 @@ class School:
                 print(f"- {student}")
             print()
 
+    def display_students(self) -> None:
+        print("Liste des étudiants: ")
+        for student in self.students:
+            print(f"- {student}, {student.address}")
+
+    def display_teachers(self) -> None:
+        print("Liste des enseignants: ")
+        for teacher in self.teachers:
+            print(f"- {teacher}")
+
     @staticmethod
     def get_course_by_id(id_course: int):
         course_dao: CourseDao = CourseDao()
         return course_dao.read(id_course)
+
+    @staticmethod
+    def get_student_by_id(id_student: int):
+        student_dao: StudentDao = StudentDao()
+        return student_dao.read(id_student)
+
+    @staticmethod
+    def get_teacher_by_id(id_teacher: int):
+        teacher_dao: TeacherDao = TeacherDao()
+        return teacher_dao.read(id_teacher)

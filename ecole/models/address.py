@@ -15,3 +15,6 @@ class Address:
     street: str
     city: str
     postal_code: int
+
+    def __str__(self):
+        return f"adresse: {self.street}, {self.postal_code}, {self.city}"

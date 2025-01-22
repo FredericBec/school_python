@@ -17,35 +17,23 @@ from business.school import School
 def init_school(school: School) -> None:
     """Initialisation d'un jeu de test pour l'école school."""
     # création des étudiants et rattachement à leur adresse
-    paul: Student    = Student('Paul', 'Dubois', 12)
-    valerie: Student = Student('Valérie', 'Dumont', 13)
-    louis: Student   = Student('Louis', 'Berthot', 11)
-
-    paul.adress    = Address('12 rue des Pinsons', 'Castanet', 31320)
-    valerie.adress = Address('43 avenue Jean Zay', 'Toulouse', 31200)
-    louis.adress   = Address('7 impasse des Coteaux', 'Cornebarrieu', 31150)
+    paul: Student = school.get_student_by_id(1)
+    valerie: Student = school.get_student_by_id(2)
+    louis: Student = school.get_student_by_id(3)
 
     # ajout de ceux-ci à l'école
     for student in [paul, valerie, louis]:
         school.add_student(student)
 
     # création des cours
-    francais: Course = Course("Français", date(2024, 1, 29),
-                                          date(2024, 2, 16))
-    histoire: Course = Course("Histoire", date(2024, 2, 5),
-                                          date(2024, 2, 16))
-    geographie: Course = Course("Géographie", date(2024, 2, 5),
-                                              date(2024, 2, 16))
-    mathematiques: Course = Course("Mathématiques", date(2024, 2, 12),
-                                                    date(2024, 3, 8))
-    physique: Course = Course("Physique", date(2024, 2, 19),
-                                          date(2024, 3, 8))
-    chimie: Course = Course("Chimie", date(2024, 2, 26),
-                                      date(2024, 3, 15))
-    anglais: Course = Course("Anglais", date(2024, 2, 12),
-                                        date(2024, 2, 24))
-    sport: Course = Course("Sport", date(2024, 3, 4),
-                                    date(2024, 3, 15))
+    francais: Course = school.get_course_by_id(1)
+    histoire: Course = school.get_course_by_id(2)
+    geographie: Course = school.get_course_by_id(3)
+    mathematiques: Course = school.get_course_by_id(4)
+    physique: Course = school.get_course_by_id(5)
+    chimie: Course = school.get_course_by_id(6)
+    anglais: Course = school.get_course_by_id(7)
+    sport: Course = school.get_course_by_id(8)
 
     # ajout de ceux-ci à l'école
     for course in [francais, histoire, geographie, mathematiques,
@@ -53,12 +41,12 @@ def init_school(school: School) -> None:
         school.add_course(course)
 
     # création des enseignants
-    victor  = Teacher('Victor', 'Hugo', 23, date(2023, 9, 4))
-    jules   = Teacher('Jules', 'Michelet', 32, date(2023, 9, 4))
-    sophie  = Teacher('Sophie', 'Germain', 25, date(2023, 9, 4))
-    marie   = Teacher('Marie', 'Curie', 31, date(2023, 9, 4))
-    william = Teacher('William', 'Shakespeare', 34, date(2023, 9, 4))
-    michel  = Teacher('Michel', 'Platini', 42, date(2023, 9, 4))
+    victor = school.get_teacher_by_id(4)
+    jules = school.get_teacher_by_id(5)
+    sophie = school.get_teacher_by_id(6)
+    marie = school.get_teacher_by_id(7)
+    william = school.get_teacher_by_id(8)
+    michel = school.get_teacher_by_id(9)
 
     # ajout de ceux-ci à l'école
     for teacher in [victor, jules, sophie, marie, william, michel]:
@@ -104,10 +92,8 @@ Bienvenue dans notre école
 
     # affichage de la liste des cours, leur enseignant et leurs élèves
     school.display_courses_list()
-
-    print(school.get_course_by_id(1))
-    print(school.get_course_by_id(2))
-    print(school.get_course_by_id(9))
+    school.display_students()
+    school.display_teachers()
 
 
 if __name__ == '__main__':

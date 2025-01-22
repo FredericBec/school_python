@@ -17,7 +17,7 @@ class Person(ABC):
     first_name: str
     last_name: str
     age: int
-    adress: Address | None = field(default=None, init=False)
+    address: Address | None = field(default=None, init=False)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name} ({self.age} ans)"
