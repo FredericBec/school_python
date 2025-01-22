@@ -14,9 +14,9 @@ import pymysql.cursors
 class Dao[T](ABC):
     connection: ClassVar[pymysql.Connection] = \
         pymysql.connect(host='localhost',
-                        user='ecole',
-                        password='FqDEuKWd9TxLERZg6ooh',
-                        database='ecole',
+                        user='root',
+                        password='fms2024',
+                        database='school',
                         cursorclass=pymysql.cursors.DictCursor)
 
     @abstractmethod
@@ -26,13 +26,13 @@ class Dao[T](ABC):
         :param obj: à créer sous forme d'entité en BD
         :return: l'id de l'entité insérée en BD (0 si la création a échoué).
         """
-        ...
+        pass
 
     @abstractmethod
     def read(self, id_entity: int) -> Optional[T]:
         """Renvoie l'objet correspondant à l'entité dont l'id est id_entity
            (ou None s'il n'a pu être trouvé)"""
-        ...
+        pass
 
     @abstractmethod
     def update(self, obj: T) -> bool:
@@ -41,7 +41,7 @@ class Dao[T](ABC):
         :param obj: objet déjà mis à jour en mémoire
         :return: True si la mise à jour a pu être réalisée
         """
-        ...
+        pass
 
     @abstractmethod
     def delete(self, obj: T) -> bool:
@@ -50,4 +50,4 @@ class Dao[T](ABC):
         :param obj: objet dont l'entité correspondante est à supprimer
         :return: True si la suppression a pu être réalisée
         """
-        ...
+        pass

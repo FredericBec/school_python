@@ -4,10 +4,12 @@
 Classe Dao[Course]
 """
 
-from models.course import Course
-from daos.dao import Dao
+
 from dataclasses import dataclass
 from typing import Optional
+
+from ecole.daos.dao import Dao
+from ecole.models.course import Course
 
 
 @dataclass
@@ -16,7 +18,7 @@ class CourseDao(Dao[Course]):
         """Crée en BD l'entité Course correspondant au cours obj
 
         :param course: à créer sous forme d'entité Course en BD
-        :return: l'id de l'entité insérée en BD (0 si la création a échoué)
+        :return: l'id de l'entité insérée en BD (0 si la création a échoué).
         """
         ...
         return 0
