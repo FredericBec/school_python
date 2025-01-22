@@ -1,0 +1,27 @@
+@startuml School
+
+actor Directeur as directeur
+entity "paul: Student" as paul
+entity "geographie: Course" as geographie
+entity "physique: Course" as physique
+entity "anglais: Course" as anglais
+
+create paul
+directeur -> paul: << create >>
+
+activate paul
+paul -> geographie: add_course
+activate geographie
+deactivate geographie
+
+paul -> physique: add_course
+activate physique
+deactivate physique
+
+paul -> anglais: add_course
+activate anglais
+deactivate anglais
+
+deactivate paul
+
+@enduml

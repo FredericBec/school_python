@@ -1,0 +1,47 @@
+@startuml School
+
+abstract class Person
+{
+
+    -string first_name
+    -string last_name
+    -integer age
+}
+
+class Teacher 
+{
+    -date start_date
+}
+
+class Student
+{
+    -integer student_nbr
+}
+
+class Address
+{
+    -string street
+    -string city
+    -integer postal_code
+}
+ 
+class Course
+{
+    -string name
+    -date start_date
+    -date end_date
+} 
+
+
+Person <|-- Student 
+
+Person <|-- Teacher
+
+Person "1" --> "1" Address : lives >
+
+Student "0..n" <--> "0..n" Course : takes >
+
+Course "1..n" <--u> "1" Teacher : teaches < 
+
+
+@enduml

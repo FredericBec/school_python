@@ -1,0 +1,53 @@
+@startuml School
+
+left to right direction
+
+actor Elève as e
+actor Enseignant as p
+actor Directeur as d
+
+e <|-right- p
+p <|-right- d
+
+rectangle Ecole {
+  usecase "Afficher la liste\ndes cours et\nleur enseignant" as UC1
+  
+  note bottom of UC1
+  - élève : qu'il suit
+  - enseignant : qu'il enseigne
+  - directeur : tous
+  end note
+
+  note as note_gerer
+  	Gérer les cours, enseignants, élèves, adresses =
+  	créer, voir, modifier*, supprimer
+  	~* les seuls attributs de l'entité concernée
+  end note
+  
+  usecase "Gérer les cours" as UC2
+  
+  usecase "Gérer la liste\ndes élèves\nsuivant un cours" as UC3
+  UC3 .up.> UC2 : extends
+  
+  usecase "Afficher les élèves\nd'un cours" as UC4
+  UC4 .up.> UC1 : extends
+  
+  usecase "Gérer les enseignants" as UC5
+  
+  usecase "Gérer la liste\ndes cours\nd'un enseignant" as UC6
+  UC6 .up.> UC5 : extends
+  
+  usecase "Gérer les élèves" as UC7
+
+  usecase "Gérer et rattacher\nleurs adresses" as UC8
+  UC8 .up.> UC5 : extends
+  UC8 .up.> UC7 : extends
+}
+
+e -- UC1
+
+d -- UC2
+d -- UC5
+d -- UC7
+
+@enduml
