@@ -6,12 +6,12 @@ Classe School
 
 from dataclasses import dataclass, field
 
-from ecole.daos.course_dao import CourseDao
-from ecole.daos.student_dao import StudentDao
-from ecole.daos.teacher_dao import TeacherDao
-from ecole.models.course import Course
-from ecole.models.student import Student
-from ecole.models.teacher import Teacher
+from daos.course_dao import CourseDao
+from daos.student_dao import StudentDao
+from daos.teacher_dao import TeacherDao
+from models.course import Course
+from models.student import Student
+from models.teacher import Teacher
 
 
 @dataclass
@@ -92,7 +92,7 @@ class School:
         return teacher_dao.read(id_teacher)
 
     @staticmethod
-    def get_all_students():
+    def get_all_students() -> list[Student]:
         """
         Retrieve all students
         :return: student list
@@ -101,7 +101,7 @@ class School:
         return student_dao.read_all()
 
     @staticmethod
-    def get_all_teachers():
+    def get_all_teachers() -> list[Teacher]:
         """
         Retrieve all teachers
         :return: teacher list
@@ -110,7 +110,7 @@ class School:
         return teacher_dao.read_all()
 
     @staticmethod
-    def get_all_courses():
+    def get_all_courses() -> list[Course]:
         """
         Retrieve all courses
         :return: course list

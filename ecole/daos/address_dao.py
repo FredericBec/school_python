@@ -1,12 +1,12 @@
 from typing import Optional
 
-from ecole.daos.dao import Dao
-from ecole.models.address import Address
+from daos.dao import Dao
+from models.address import Address
 
 
 class AddressDao(Dao[Address]):
     def create(self, address: Address) -> int:
-        id_address = address.id
+        id_address = 0
         return id_address
 
     def read(self, id_address: int) -> Optional[Address]:
@@ -34,5 +34,5 @@ class AddressDao(Dao[Address]):
         return False
 
     def read_all(self) -> list[Address]:
-        address_list = []
+        address_list: list[Address] = []
         return address_list

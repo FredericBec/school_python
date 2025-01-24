@@ -1,15 +1,15 @@
 from typing import Optional
 
-from ecole.daos.dao import Dao
-from ecole.models.address import Address
-from ecole.models.student import Student
+from daos.dao import Dao
+from models.address import Address
+from models.student import Student
 
 
 class StudentDao(Dao[Student]):
     """Class for all CRUD"""
 
     def create(self, student: Student) -> int:
-        id_student = student.id
+        id_student = 0
         return id_student
 
     def read(self, id_student: int) -> Optional[Student]:
@@ -40,7 +40,7 @@ class StudentDao(Dao[Student]):
     def delete(self, student: Student) -> bool:
         return False
 
-    def read_all(self):
+    def read_all(self) -> list[Student]:
         """
         Retrieve all students in database
         :return: student list

@@ -8,10 +8,9 @@ Classe Dao[Course]
 from dataclasses import dataclass
 from typing import Optional
 
-from ecole.daos.dao import Dao
-from ecole.daos.teacher_dao import TeacherDao
-from ecole.models.course import Course
-from ecole.models.teacher import Teacher
+from daos.dao import Dao
+from models.course import Course
+from models.teacher import Teacher
 
 
 @dataclass

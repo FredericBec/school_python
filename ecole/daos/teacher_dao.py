@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ecole.daos.dao import Dao
-from ecole.models.teacher import Teacher
+from daos.dao import Dao
+from models.teacher import Teacher
 
 
 class TeacherDao(Dao[Teacher]):
