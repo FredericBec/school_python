@@ -27,3 +27,7 @@ class AddressDao(Dao[Address]):
 
     def delete(self, address: Address) -> bool:
         return False
+
+    def read_all(self) -> list[Address]:
+        address_list = []
+        return address_list

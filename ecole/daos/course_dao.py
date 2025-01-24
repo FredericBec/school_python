@@ -9,7 +9,9 @@ from dataclasses import dataclass
 from typing import Optional
 
 from ecole.daos.dao import Dao
+from ecole.daos.teacher_dao import TeacherDao
 from ecole.models.course import Course
+from ecole.models.teacher import Teacher
 
 
 @dataclass
@@ -56,3 +58,15 @@ class CourseDao(Dao[Course]):
         """
         ...
         return True
+
+    def read_all(self) -> list[Course]:
+        courses = list[Course]
+        with Dao.connection.cursor() as cursor:
+            sql = ("SELECT name, start_date, end_date FROM course "
+                   "JOIN teacher ON teacher.id_teacher = course.id_teacher")
+            cursor.execute(sql)
+            records = cursor.fetchall()
+        if records:
+            courses = [Course(name=row['name'], start_date=row['start_date'], end_date=row['end_date'])
+                       for row in records]
+        return courses

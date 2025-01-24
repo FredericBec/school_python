@@ -51,3 +51,11 @@ class Dao[T](ABC):
         :return: True si la suppression a pu être réalisée
         """
         pass
+
+    @abstractmethod
+    def read_all(self) -> list[T]:
+        """
+        Return a list of entities
+        :return: a list of entities in database
+        """
+        pass

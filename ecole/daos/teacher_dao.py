@@ -30,3 +30,7 @@ class TeacherDao(Dao[Teacher]):
 
     def delete(self, teacher: Teacher) -> bool:
         return False
+
+    def read_all(self) -> list[Teacher]:
+        teachers = []
+        return teachers

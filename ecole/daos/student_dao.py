@@ -33,3 +33,18 @@ class StudentDao(Dao[Student]):
 
     def delete(self, student: Student) -> bool:
         return False
+
+    def read_all(self):
+        students: list[Student]
+        with Dao.connection.cursor() as cursor:
+            sql = ("SELECT first_name, last_name, age FROM student "
+                   "JOIN person ON student.id_person = person.id_person")
+            cursor.execute(sql)
+            records = cursor.fetchall()
+        if records:
+            students = [Student(first_name=row['first_name'], last_name=row['last_name'], age=row['age'])
+                        for row in records]
+        else:
+            students = []
+
+        return students

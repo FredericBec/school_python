@@ -51,8 +51,8 @@ class School:
 
     def display_students(self) -> None:
         print("Liste des étudiants: ")
-        for student in self.students:
-            print(f"- {student}, {student.address}")
+        for student in self.get_all_students():
+            print(f"- {student}")
 
     def display_teachers(self) -> None:
         print("Liste des enseignants: ")
@@ -73,3 +73,18 @@ class School:
     def get_teacher_by_id(id_teacher: int):
         teacher_dao: TeacherDao = TeacherDao()
         return teacher_dao.read(id_teacher)
+
+    @staticmethod
+    def get_all_students():
+        student_dao: StudentDao = StudentDao()
+        return student_dao.read_all()
+
+    @staticmethod
+    def get_all_teachers():
+        teacher_dao: TeacherDao = TeacherDao()
+        return teacher_dao.read_all()
+
+    @staticmethod
+    def get_all_courses():
+        course_dao: CourseDao = CourseDao()
+        return course_dao.read_all()
