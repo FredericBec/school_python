@@ -79,6 +79,13 @@ def init_school(school: School) -> None:
 
 
 def valid_integer(prompt: str, min_int: int, max_int: int) -> int:
+    """
+    Verify if the user enter the right entry
+    :param prompt: question to the user
+    :param min_int: value minimum
+    :param max_int: value maximum
+    :return:
+    """
     valid_number: bool = False
     number: int = 0
 
@@ -97,6 +104,7 @@ def valid_integer(prompt: str, min_int: int, max_int: int) -> int:
 
 
 def research_student(school: School):
+    """Method for search a student in database and displaying the result of request"""
     school.display_students()
     research = input("Veuillez saisir le numéro d'étudiant: \n")
     request = school.get_student_by_id(int(research))
@@ -107,6 +115,7 @@ def research_student(school: School):
 
 
 def research_teacher(school: School):
+    """Method for search a teacher in database and displaying the result of request"""
     school.display_teachers()
     research = input("Veuillez saisir l'id: \n")
     request = school.get_teacher_by_id(int(research))
@@ -117,6 +126,7 @@ def research_teacher(school: School):
 
 
 def main_menu(school: School) -> None:
+    """Display main menu and ask user to choose an action"""
     is_continue = True
     enter_key_str = "Saisir la touche Entrée pour continuer"
     while is_continue:

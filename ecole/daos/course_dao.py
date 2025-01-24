@@ -60,6 +60,10 @@ class CourseDao(Dao[Course]):
         return True
 
     def read_all(self) -> list[Course]:
+        """
+        Retrieve all course datas in the database by sending a request
+        :return: a list of course
+        """
         courses = list[Course]
         with Dao.connection.cursor() as cursor:
             sql = ("SELECT name, start_date, end_date, p.first_name, p.last_name, p.age, t.hiring_date FROM course "

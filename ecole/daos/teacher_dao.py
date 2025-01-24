@@ -5,12 +5,18 @@ from ecole.models.teacher import Teacher
 
 
 class TeacherDao(Dao[Teacher]):
+    """Class for request all CRUD"""
 
     def create(self, teacher: Teacher) -> int:
         id_teacher = teacher.id
         return id_teacher
 
     def read(self, id_teacher: int) -> Optional[Teacher]:
+        """
+        Retrieve an optional teacher in database
+        :param id_teacher: teacher id
+        :return: teacher in db
+        """
         teacher: Optional[Teacher]
         with Dao.connection.cursor() as cursor:
             sql = ("SELECT * FROM teacher "
@@ -32,6 +38,10 @@ class TeacherDao(Dao[Teacher]):
         return False
 
     def read_all(self) -> list[Teacher]:
+        """
+        Retrieve all teachers in database
+        :return: a list of teacher
+        """
         teachers: list[Teacher]
         with Dao.connection.cursor() as cursor:
             sql = ("SELECT person.id_person, first_name, last_name, age, hiring_date FROM teacher "

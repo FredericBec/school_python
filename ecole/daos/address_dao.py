@@ -10,6 +10,11 @@ class AddressDao(Dao[Address]):
         return id_address
 
     def read(self, id_address: int) -> Optional[Address]:
+        """
+        Retrieve an optional address in database
+        :param id_address: id
+        :return: address
+        """
         address: Optional[Address]
         with Dao.connection.cursor() as cursor:
             sql = "SELECT * FROM address WHERE id_address = %s"

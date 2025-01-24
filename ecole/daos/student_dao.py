@@ -6,12 +6,18 @@ from ecole.models.student import Student
 
 
 class StudentDao(Dao[Student]):
+    """Class for all CRUD"""
 
     def create(self, student: Student) -> int:
         id_student = student.id
         return id_student
 
     def read(self, id_student: int) -> Optional[Student]:
+        """
+        Retrieve an optional student
+        :param id_student: id
+        :return: student
+        """
         student: Optional[Student]
         with Dao.connection.cursor() as cursor:
             sql = ("SELECT * FROM student "
@@ -35,6 +41,10 @@ class StudentDao(Dao[Student]):
         return False
 
     def read_all(self):
+        """
+        Retrieve all students in database
+        :return: student list
+        """
         students: list[Student]
         with Dao.connection.cursor() as cursor:
             sql = ("SELECT person.id_person, first_name, last_name, age FROM student "

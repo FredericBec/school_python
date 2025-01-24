@@ -50,41 +50,70 @@ class School:
             print()
 
     def display_students(self) -> None:
+        """Display students list"""
         print("Liste des étudiants: ")
         for student in self.get_all_students():
             print(f"- {student}")
 
     def display_teachers(self) -> None:
+        """Display teachers list"""
         print("Liste des enseignants: ")
         for teacher in self.get_all_teachers():
             print(f"[{teacher.id}] - {teacher}")
 
     @staticmethod
     def get_course_by_id(id_course: int):
+        """
+        Retrieve a course in database
+        :param id_course: id
+        :return: course
+        """
         course_dao: CourseDao = CourseDao()
         return course_dao.read(id_course)
 
     @staticmethod
     def get_student_by_id(id_student: int):
+        """
+        Retrieve a student
+        :param id_student: id of student
+        :return: result of request
+        """
         student_dao: StudentDao = StudentDao()
         return student_dao.read(id_student)
 
     @staticmethod
     def get_teacher_by_id(id_teacher: int):
+        """
+        Retrieve a teacher
+        :param id_teacher: id
+        :return: result of request
+        """
         teacher_dao: TeacherDao = TeacherDao()
         return teacher_dao.read(id_teacher)
 
     @staticmethod
     def get_all_students():
+        """
+        Retrieve all students
+        :return: student list
+        """
         student_dao: StudentDao = StudentDao()
         return student_dao.read_all()
 
     @staticmethod
     def get_all_teachers():
+        """
+        Retrieve all teachers
+        :return: teacher list
+        """
         teacher_dao: TeacherDao = TeacherDao()
         return teacher_dao.read_all()
 
     @staticmethod
     def get_all_courses():
+        """
+        Retrieve all courses
+        :return: course list
+        """
         course_dao: CourseDao = CourseDao()
         return course_dao.read_all()
