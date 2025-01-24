@@ -62,11 +62,15 @@ class CourseDao(Dao[Course]):
     def read_all(self) -> list[Course]:
         courses = list[Course]
         with Dao.connection.cursor() as cursor:
-            sql = ("SELECT name, start_date, end_date FROM course "
-                   "JOIN teacher ON teacher.id_teacher = course.id_teacher")
+            sql = ("SELECT name, start_date, end_date, p.first_name, p.last_name, p.age, t.hiring_date FROM course "
+                   "JOIN teacher AS t ON t.id_teacher = course.id_teacher "
+                   "JOIN person AS p ON p.id_person = t.id_person ")
             cursor.execute(sql)
             records = cursor.fetchall()
         if records:
             courses = [Course(name=row['name'], start_date=row['start_date'], end_date=row['end_date'])
                        for row in records]
+            for course, row in zip(courses, records):
+                course.teacher = Teacher(first_name=row['first_name'], last_name=row['last_name'], age=row['age'],
+                                         hiring_date=row['hiring_date'])
         return courses

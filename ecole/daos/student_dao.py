@@ -37,13 +37,16 @@ class StudentDao(Dao[Student]):
     def read_all(self):
         students: list[Student]
         with Dao.connection.cursor() as cursor:
-            sql = ("SELECT first_name, last_name, age FROM student "
+            sql = ("SELECT person.id_person, first_name, last_name, age FROM student "
                    "JOIN person ON student.id_person = person.id_person")
             cursor.execute(sql)
             records = cursor.fetchall()
         if records:
             students = [Student(first_name=row['first_name'], last_name=row['last_name'], age=row['age'])
                         for row in records]
+            for student, row in zip(students, records):
+                student.id = row['id_person']
+                student.student_nbr = row['id_person']
         else:
             students = []
 

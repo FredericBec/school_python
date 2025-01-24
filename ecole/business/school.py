@@ -43,7 +43,7 @@ class School:
         """Affichage de la liste des cours avec pour chacun d'eux :
         - leur enseignant
         - la liste des élèves le suivant"""
-        for course in self.courses:
+        for course in self.get_all_courses():
             print(f"cours de {course}")
             for student in course.students_taking_it:
                 print(f"- {student}")
@@ -56,8 +56,8 @@ class School:
 
     def display_teachers(self) -> None:
         print("Liste des enseignants: ")
-        for teacher in self.teachers:
-            print(f"- {teacher}")
+        for teacher in self.get_all_teachers():
+            print(f"[{teacher.id}] - {teacher}")
 
     @staticmethod
     def get_course_by_id(id_course: int):

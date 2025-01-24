@@ -4,7 +4,7 @@
 """
 Application de gestion d'une école
 """
-
+import time
 from datetime import date
 
 from models.address import Address
@@ -78,22 +78,85 @@ def init_school(school: School) -> None:
     michel.add_course(sport)
 
 
+def valid_integer(prompt: str, min_int: int, max_int: int) -> int:
+    valid_number: bool = False
+    number: int = 0
+
+    print(prompt)
+    while not valid_number:
+        number_str: str = input().strip()
+        if number_str.isdigit():
+            number = int(number_str)
+            valid_number = (min_int <= number <= max_int)
+            if not valid_number:
+                print(f"Merci de saisir un nombre entier compris entre {min_int} et {max_int}")
+        else:
+            print("Merci de saisir un nombre entier positif !")
+
+    return number
+
+
+def research_student(school: School):
+    school.display_students()
+    research = input("Veuillez saisir le numéro d'étudiant: \n")
+    request = school.get_student_by_id(int(research))
+    if request is not None:
+        print(request)
+    else:
+        print("Veuillez saisir un numéro valide!")
+
+
+def research_teacher(school: School):
+    school.display_teachers()
+    research = input("Veuillez saisir l'id: \n")
+    request = school.get_teacher_by_id(int(research))
+    if request is not None:
+        print(request)
+    else:
+        print("Veuillez saisir un numéro valide!")
+
+
+def main_menu(school: School) -> None:
+    is_continue = True
+    enter_key_str = "Saisir la touche Entrée pour continuer"
+    while is_continue:
+        print("""\
+        --------------------------
+        Bienvenue dans notre école
+        --------------------------""")
+
+        print("[1] - Afficher la liste des cours")
+        print("[2] - Afficher la liste des étudiants")
+        print("[3] - Afficher la liste des enseignants")
+        print("[4] - Rechercher un étudiant")
+        print("[5] - Rechercher un enseignant")
+        print("[6] - Quitter l'application")
+
+        user_choice: int = valid_integer("Que souhaitez-vous faire?", 1, 6)
+        match user_choice:
+            case 1:
+                school.display_courses_list()
+                input(enter_key_str)
+            case 2:
+                school.display_students()
+                input(enter_key_str)
+            case 3:
+                school.display_teachers()
+                input(enter_key_str)
+            case 4:
+                research_student(school)
+            case 5:
+                research_teacher(school)
+            case 6:
+                is_continue = False
+                exit()
+
+
 def main() -> None:
     """Programme principal."""
-    print("""\
---------------------------
-Bienvenue dans notre école
---------------------------""")
-
     school: School = School()
-
-    # initialisation d'un ensemble de cours, enseignants et élèves composant l'école
-    init_school(school)
-
-    # affichage de la liste des cours, leur enseignant et leurs élèves
-    school.display_courses_list()
-    school.display_students()
-    school.display_teachers()
+    # init_school(school)
+    main_menu(school)
 
 
 if __name__ == '__main__':
